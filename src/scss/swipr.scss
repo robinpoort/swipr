@@ -1,0 +1,76 @@
+// Variables
+// =========
+
+// Wrapper
+$swipr-wrapper-selector: '[data-swipr-wrapper]' !default;
+$swipr-wrapper-position: relative !default;
+$swipr-wrapper-overflow: hidden !default;
+
+// Swiper
+$swipr-selector: '[data-swipr]' !default;
+$swipr-overflow: auto !default;
+
+// Buttons
+$swipr-button-position: absolute !default;
+$swipr-button-top: 50% !default;
+$swipr-button-transform: translateY(-50%) !default;
+$swipr-prev-button-selector: '.swipr-prev' !default;
+$swipr-prev-button-left: 0 !default;
+$swipr-next-button-selector: '.swipr-next' !default;
+$swipr-next-button-right: 0 !default;
+
+// Disabled
+$swipr-disabled-selector: '.is-disabled' !default;
+$swipr-disabled-opacity: 0.5 !default;
+$swipr-disabled-pointer-events: none !default;
+
+
+// Selectors
+// =========
+
+// Wrapper
+@if $swipr-wrapper-selector != false {
+  #{$swipr-wrapper-selector} {
+    @if $swipr-wrapper-position != false { position: $swipr-wrapper-position; }
+    @if $swipr-wrapper-overflow != false { overflow: $swipr-wrapper-overflow; }
+  }
+}
+
+// Swiper
+@if $swipr-selector != false {
+  #{$swipr-selector} {
+    @if $swipr-overflow != false { overflow: $swipr-overflow; }
+  }
+}
+
+// Buttons
+@if ($swipr-prev-button-selector != false and $swipr-next-button-selector != false) {
+  #{$swipr-prev-button-selector},
+  #{$swipr-next-button-selector} {
+    @if $swipr-button-position != false { position: $swipr-button-position; }
+    @if $swipr-button-top != false { top: $swipr-button-top; }
+    @if $swipr-button-transform != false { transform: $swipr-button-transform; }
+  }
+}
+
+// Prev
+@if $swipr-prev-button-selector != false {
+  #{$swipr-prev-button-selector} {
+    @if $swipr-prev-button-left != false { left: $swipr-prev-button-left; }
+  }
+}
+
+// Next
+@if $swipr-next-button-selector != false {
+  #{$swipr-next-button-selector} {
+    @if $swipr-next-button-right != false { right: $swipr-next-button-right; }
+  }
+}
+
+// Disabled
+@if $swipr-disabled-selector != false {
+  #{$swipr-disabled-selector} {
+    @if $swipr-disabled-opacity != false { opacity: $swipr-disabled-opacity; }
+    @if $swipr-disabled-pointer-events != false { pointer-events: $swipr-disabled-pointer-events; }
+  }
+}

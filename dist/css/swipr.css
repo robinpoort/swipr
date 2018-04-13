@@ -1,0 +1,28 @@
+[data-swipr-wrapper] {
+  position: relative;
+  overflow: hidden;
+}
+
+[data-swipr] {
+  overflow: auto;
+}
+
+.swipr-prev,
+.swipr-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.swipr-prev {
+  left: 0;
+}
+
+.swipr-next {
+  right: 0;
+}
+
+.is-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
