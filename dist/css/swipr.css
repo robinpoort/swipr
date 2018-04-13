@@ -5,6 +5,7 @@
 
 [data-swipr] {
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .swipr-prev,

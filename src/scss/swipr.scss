@@ -9,6 +9,7 @@ $swipr-wrapper-overflow: hidden !default;
 // Swiper
 $swipr-selector: '[data-swipr]' !default;
 $swipr-overflow: auto !default;
+$swipr-webkit-overflow: touch !default;
 
 // Buttons
 $swipr-button-position: absolute !default;
@@ -40,6 +41,7 @@ $swipr-disabled-pointer-events: none !default;
 @if $swipr-selector != false {
   #{$swipr-selector} {
     @if $swipr-overflow != false { overflow: $swipr-overflow; }
+    @if $swipr-webkit-overflow != false { -webkit-overflow-scrolling: $swipr-webkit-overflow; }
   }
 }
 
