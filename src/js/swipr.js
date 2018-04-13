@@ -27,6 +27,7 @@
     var defaults = {
         wrapper: '[data-swipr-wrapper]',
         swiper: '[data-swipr]',
+        startItem: '[data-swipr-start]',
         swiprPreviousButtonClass: 'swipr-prev',
         swiprPreviousButtonContent: 'previous',
         swiprNextButtonClass: 'swipr-next',
@@ -400,7 +401,13 @@
                 hideButtons($swiper);
 
                 // Add initiated class
-                $swiper.parentNode.classList.add(settings.initiatedClass);
+                $swiper.parentNode.classList.add(localSettings.initiatedClass);
+
+                // See if there's a start item
+                var startScroll = $swiper.querySelector(localSettings.startItem);
+                if (startScroll) {
+                    animateScroll($swiper, startScroll.offsetLeft, settings.speed);
+                }
 
                 // Check for scrollbar
                 hasHorizontalScrollbar = $swiper.scrollWidth > $swiper.clientWidth;
