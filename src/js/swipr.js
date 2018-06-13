@@ -274,8 +274,10 @@
             // Add classes and content
             $prevButton.classList.add(settings.swiprPreviousButtonClass);
             $prevButton.innerHTML = settings.swiprPreviousButtonContent;
+            $prevButton.setAttribute('type', 'button');
             $nextButton.classList.add(settings.swiprNextButtonClass);
             $nextButton.innerHTML = settings.swiprNextButtonContent;
+            $nextButton.setAttribute('type', 'button');
 
             // Add to the DOM
             $swiper.parentNode.insertBefore($prevButton, $swiper);
