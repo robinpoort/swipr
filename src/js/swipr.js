@@ -36,7 +36,8 @@
         amount: 0.8,
         speed: 400,
         initiatedClass: 'is-initiated',
-        enabledClass: 'is-enabled'
+        enabledClass: 'is-enabled',
+        disableOnMobileTouch: true
     };
 
 
@@ -598,11 +599,11 @@
             // feature test
             if (!supports) return;
 
-            // Return if device is mobile and support touch
-            if (isTouchDevice() && isMobile()) return;
-
             // Set variables
             settings = extend(defaults, options || {});
+
+            // Return if device is mobile and support touch
+            if (isTouchDevice() && isMobile() && settings.disableOnMobileTouch) return;
 
             // Get scrollbar size
             scrollbarSize = getScrollbarSize();
