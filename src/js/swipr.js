@@ -28,6 +28,7 @@
         wrapper: '[data-swipr-wrapper]',
         swiper: '[data-swipr]',
         startItem: '[data-swipr-start]',
+        startItemPosition: 'left',
         swiprPreviousButtonClass: 'swipr-prev',
         swiprPreviousButtonContent: 'previous',
         swiprNextButtonClass: 'swipr-next',
@@ -196,7 +197,7 @@
         outer.parentNode.removeChild(outer);
 
         // Set fallback
-        if (widthNoScroll == widthWithScroll) {
+        if (widthNoScroll === widthWithScroll) {
             return false;
         }
 
@@ -209,7 +210,7 @@
      */
     function getFirstChild(el){
         var firstChild = el.firstChild;
-        while (firstChild != null && firstChild.nodeType == 3) { // skip TextNodes
+        while (firstChild != null && firstChild.nodeType === 3) { // skip TextNodes
             firstChild = firstChild.nextSibling;
         }
         return firstChild;
@@ -221,7 +222,7 @@
      */
     function getPreviousSibling(el){
         var prevSibling = el.previousSibling;
-        while (prevSibling != null && prevSibling.nodeType == 3) { // skip TextNodes
+        while (prevSibling != null && prevSibling.nodeType === 3) { // skip TextNodes
             prevSibling = prevSibling.previousSibling;
         }
         return prevSibling;
@@ -233,7 +234,7 @@
      */
     function getNextSibling(el){
         var nextSibling = el.nextSibling;
-        while (nextSibling != null && nextSibling.nodeType == 3) { // skip TextNodes
+        while (nextSibling != null && nextSibling.nodeType === 3) { // skip TextNodes
             nextSibling = nextSibling.nextSibling;
         }
         return nextSibling;
@@ -364,7 +365,7 @@
             }
 
             // Show/hide next button
-            if ($swiper.scrollWidth - $swiper.scrollLeft == $swiper.offsetWidth) {
+            if ($swiper.scrollWidth - $swiper.scrollLeft === $swiper.offsetWidth) {
                 $nextButton.disabled = true;
                 $nextButton.classList.add(settings.disabledButtonClass);
             } else {
@@ -378,7 +379,7 @@
          * Set scrollbar size
          */
         var setScrollbarStyle = function($swiper, scrollbarSize) {
-            if (scrollbarSize != false) {
+            if (scrollbarSize !== false) {
                 $swiper.style.marginBottom = -(scrollbarSize * 2) + 'px';
                 $swiper.style.paddingBottom = scrollbarSize + 'px';
             }
@@ -406,12 +407,6 @@
                 // Add initiated class
                 $swiper.parentNode.classList.add(localSettings.initiatedClass);
 
-                // See if there's a start item
-                var startScroll = $swiper.querySelector(localSettings.startItem);
-                if (startScroll) {
-                    animateScroll($swiper, startScroll.offsetLeft, settings.speed);
-                }
-
                 // Check for scrollbar
                 hasHorizontalScrollbar = $swiper.scrollWidth > $swiper.clientWidth;
 
@@ -425,6 +420,29 @@
                 // Disable the swiper
                 else {
                     publicAPIs.disable($swiper);
+                }
+
+                // See if there's a start item
+                var startScroll = $swiper.querySelector(localSettings.startItem);
+                if (startScroll) {
+                    // Set relative position for start item to calculate correctly
+                    $swiper.style.position = 'relative';
+
+                    // Default offset
+                    var offset = startScroll.offsetLeft;
+
+                    // Center
+                    if (localSettings.startItemPosition === 'center') {
+                        offset = startScroll.offsetLeft + (startScroll.offsetWidth / 2) - ($swiper.offsetWidth / 2);
+                    }
+
+                    // Right
+                    if (localSettings.startItemPosition === 'right') {
+                        offset = startScroll.offsetLeft + startScroll.offsetWidth - $swiper.offsetWidth;
+                    }
+
+                    // Scroll to
+                    animateScroll($swiper, offset, settings.speed);
                 }
 
             });
@@ -443,8 +461,7 @@
 
             var animateScroll = function(){
                 currentTime += increment;
-                var val = Math.easeInOutQuad(currentTime, start, change, duration);
-                element.scrollLeft = val;
+                element.scrollLeft = Math.easeInOutQuad(currentTime, start, change, duration);
                 if(currentTime < duration) {
                     setTimeout(animateScroll, increment);
                 }
@@ -475,11 +492,11 @@
             var scroll = $swiper.scrollLeft;
             var newScroll;
 
-            if (direction == 'prev') {
+            if (direction === 'prev') {
                 newScroll = scroll - width;
             }
 
-            if (direction == 'next') {
+            if (direction === 'next') {
                 newScroll = scroll + width;
             }
 
@@ -492,10 +509,10 @@
          */
         var clickHandler = function () {
             var className = this.className;
-            if ( className == settings.swiprPreviousButtonClass) {
+            if ( className === settings.swiprPreviousButtonClass) {
                 scrollTo(this.parentNode, 'prev');
             }
-            if ( className == settings.swiprNextButtonClass) {
+            if ( className === settings.swiprNextButtonClass) {
                 scrollTo(this.parentNode, 'next');
             }
         };
