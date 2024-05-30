@@ -34,6 +34,7 @@
         swiprNextButtonClass: 'swipr-next',
         swiprNextButtonContent: 'next',
         disabledButtonClass: 'is-disabled',
+        disabledButtonCorrection: 0,
         amount: 0.8,
         speed: 400,
         initiatedClass: 'is-initiated',
@@ -365,7 +366,7 @@
             }
 
             // Show/hide next button
-            if ($swiper.scrollWidth - $swiper.scrollLeft === $swiper.offsetWidth) {
+            if ($swiper.scrollWidth - ($swiper.scrollLeft + settings.disabledButtonCorrection) === $swiper.offsetWidth) {
                 $nextButton.disabled = true;
                 $nextButton.classList.add(settings.disabledButtonClass);
             } else {
