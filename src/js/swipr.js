@@ -366,7 +366,7 @@
             }
 
             // Show/hide next button
-            if ($swiper.scrollWidth - ($swiper.scrollLeft + settings.disabledButtonCorrection) === $swiper.offsetWidth) {
+            if ($swiper.scrollWidth - ($swiper.scrollLeft + settings.disabledButtonCorrection) <= $swiper.offsetWidth) {
                 $nextButton.disabled = true;
                 $nextButton.classList.add(settings.disabledButtonClass);
             } else {
